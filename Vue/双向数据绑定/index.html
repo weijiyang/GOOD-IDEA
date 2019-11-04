@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1> 你好  这里是双向数据绑定 Demo</h1>
+        <div id="name"></div>
+        <input id="text" type="text" v-model="text" placeholder="请输入内容">
+    </div>
+    <script type="text/javascript" src="observe.js"></script>
+    <script type="text/javascript" src="watcher.js"></script>
+    <script>
+        window.onload = function () {
+            let textNode = document.getElementById('name')
+            let inputNode = document.getElementById('text')
+            inputNode.oninput = function (e) {
+                vm.data.text = e.target.value
+            }
+            class Vue {
+                constructor(data, el, exp){
+                    this.data = data
+                    Observable(this.data)
+                    el.innerHTML = this.data[exp]
+                    new Watcher(this, exp, function (value) {
+                        console.log('更改信息', value)
+                        el.innerHTML = value
+                    })
+                }
+            }
+            let vm = new Vue({
+                text: '你好'
+            }, textNode, 'text')
+
+           
+        }
+    </script>
+</body>
+</html>
