@@ -10,11 +10,11 @@
         <h1> 你好  这里是双向数据绑定 Demo</h1>
         <div id="name"></div>
         <input id="text" type="text" v-model="text" placeholder="请输入内容">
+        <input type="button" onclick="changeInput()" value="点我">
     </div>
     <script type="text/javascript" src="observe.js"></script>
     <script type="text/javascript" src="watcher.js"></script>
     <script>
-        window.onload = function () {
             let textNode = document.getElementById('name')
             let inputNode = document.getElementById('text')
             inputNode.oninput = function (e) {
@@ -34,9 +34,9 @@
             let vm = new Vue({
                 text: '你好'
             }, textNode, 'text')
-
-           
-        }
+            function changeInput(){
+                vm.data.text='我是糖少'
+            }
     </script>
 </body>
 </html>
